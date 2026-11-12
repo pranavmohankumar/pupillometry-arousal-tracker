@@ -1,0 +1,50 @@
+================================================================================
+LOW-END LLM IMPLEMENTATION SPECIFICATION & PROMPT SHEET
+Project 8: Pupillometry-Based Cognitive Load & Arousal Tracker
+Target Profile: NexStem, Tobii, Affective Computing Startups
+================================================================================
+
+[SYSTEM PROMPT FOR LOCAL / LOW-END LLM (Llama-3-8B, Qwen-2.5-Coder, DeepSeek-Coder)]
+You are an expert Neural Engineering AI systems developer. Your task is to implement Project #8 in Python 3.10+.
+Follow these strict guidelines:
+1. Write clean, modular, self-contained Python code using only standard libraries, NumPy, SciPy, and PyTorch.
+2. DO NOT require external datasets. Create synthetic bio-data generators inside the code using `numpy.random`.
+3. Implement each module step-by-step as outlined below.
+4. Include type annotations, detailed NumPy docstrings, and an `if __name__ == '__main__':` block verifying end-to-end execution.
+
+--------------------------------------------------------------------------------
+PROJECT ARCHITECTURE OVERVIEW:
+OpenCV pupil extraction pipeline, Continuous Wavelet Transform (CWT) feature analyzer, and Ridge Regression arousal estimator.
+
+SYNTHETIC DATA STRATEGY:
+Synthetic video frame sequences of eye pupil dilations/constrictions under variable illumination and cognitive tasks.
+
+--------------------------------------------------------------------------------
+STEP-BY-STEP MODULE IMPLEMENTATION INSTRUCTIONS:
+
+* Module 1: Eye Video Frame Generator:
+  Generate synthetic pupil video frames with dynamic diameter changes and glare artifacts.
+
+* Module 2: Pupil Diameter Extractor:
+  Implement OpenCV ellipse fitting algorithm to measure real-time pupil contour area.
+
+* Module 3: CWT & Arousal Estimator:
+  Extract low-frequency pupil oscillations via Wavelet transform to predict arousal score.
+
+--------------------------------------------------------------------------------
+REFERENCE CODE STARTER SKELETON:
+```python
+import numpy as np
+from scipy.signal import cwt, morlet
+
+def analyze_pupil_oscillations(pupil_diameters, fs=30):
+    widths = np.arange(1, 31)
+    cwt_matrix = cwt(pupil_diameters, morlet, widths)
+    low_freq_power = np.mean(np.abs(cwt_matrix[10:25, :]), axis=0)
+    return low_freq_power
+
+```
+
+INSTRUCTIONS TO EXECUTOR:
+Execute each module sequentially. Ensure all array shapes align perfectly across data generation, processing, and prediction pipeline stages.
+================================================================================
